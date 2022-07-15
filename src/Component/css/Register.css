@@ -1,0 +1,96 @@
+.body {
+    background-color: #f7f7f7;
+}
+.main {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+}
+.block-form {
+    display: flex;
+    
+}
+#form {
+    width: 500px;
+    margin: 50px auto 50px;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+.title {
+    margin: 0;
+    padding: 6px;
+    text-align: center;
+    font-size: 18px;
+}
+.text {
+    margin: 0;
+    padding: 15px;
+}
+.form {
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+
+}
+.form-message {
+    font-size: 12px;
+    padding-left: 4px;
+}
+.form-input {
+    height: 38px;
+    padding-left: 8px;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid rgb(160, 160, 160);
+}
+.lable {
+    padding: 8px 6px;
+    font-size: 14px;
+}
+
+.invalid .form-input{
+    border: 1px solid rgb(192, 6, 6)
+}
+.invalid .form-message {
+    color: red;
+    
+   
+}
+.submit {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.btn-submit{
+    padding: 8px 42%;
+    background-color: rgb(249, 249, 249);
+    color: #443f3f;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid rgb(184, 178, 178);
+    font-size: medium;
+}
+.form-group-gender{
+    display: flex;
+    flex-direction: column;
+}
+.form-group-gender .select-role{
+    height: 38px;
+    
+    border-radius: 4px;
+    border: 1px solid rgb(189, 184, 184);
+}
+
+.nav-login {
+    padding: 8px 10px;
+}
+.nav-login a {
+    font-size: 1.2rem;
+}

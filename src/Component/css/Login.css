@@ -1,0 +1,46 @@
+.body {
+    background-color: #f7f7f7;
+}
+.main {
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+}
+.block-form-login {
+    display: flex;
+    
+}
+
+
+.form-group-login{
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+
+}
+
+
+.submit {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.btn-submit{
+    padding: 8px 42%;
+    background-color: rgb(249, 249, 249);
+    color: #443f3f;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid rgb(184, 178, 178);
+    font-size: medium;
+}
+
+
+.nav-register {
+    padding-left: 12px;
+    
+}
+.nav-register p a{
+    font-size: 1.2rem;
+    
+}
