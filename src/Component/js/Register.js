@@ -1,6 +1,5 @@
 export default Register;
-import Safe from 'react-safe';
- 
+
 
 
 function Register() {
@@ -60,12 +59,6 @@ function Register() {
                 </div>
                 
             </main>
-           
-            <Safe.script src="ClassRegister.js"></Safe.script>
-            <Safe.script>{
-            `try{Typekit.load({ async: true });}catch(e){}`
-            }
-            </Safe.script>
         </div>
         
     )

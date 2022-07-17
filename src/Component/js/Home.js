@@ -1,18 +1,15 @@
+import SliderShow from "./Slider";
 
-export default Home;
 
-function Home() {
+
+class Home extends Component {
+    render() {
     return (
         <main>
             
             <div class="container">
 
-                <div class="content-slideshow">
-                    <button onclick="plusDivs(-1)" class="btn-right"><i class="fa-solid fa-angle-right"></i></button>
-                    <img src="/img/banner.png" alt="" class="mySlides" width="100%" height="620px"></img>
-                    <img src="/img/banner2.png" alt="" class="mySlides" width="100%" height="620px"></img>
-                    <button onclick="plusDivs(1)" class="btn-left"><i class="fa-solid fa-angle-left"></i></button>
-                </div>
+                <SliderShow/>
 
                 <div class="info-policy">
                     <div class="info-policy-content">
@@ -261,4 +258,6 @@ function Home() {
         </main>
 
     );
+    }
 }
+export default Home;

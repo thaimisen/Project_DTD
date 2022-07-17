@@ -11,7 +11,6 @@ import React from "react";
 import Home from './Component/js/Home.js';
 import Foot from './Component/js/Footer.js';
 import Head from './Component/js/Header.js';
-import Slider from './Component/js/Slider.js';
 import Register from './Component/js/Register.js';
 import Login from './Component/js/Login.js';
 // import ShowProduct from './Component/js/ShowProduct.js';
@@ -33,13 +32,9 @@ function App() {
     <Route path="/" >
           <Head />
         </Route>
-      
         <Route exact path="/" >
           <Home />
         </Route>
-        {/* <Route  path="/">
-          <Slider />
-        </Route> */}
         <Switch>
         <Route path="/register">
           <Register />

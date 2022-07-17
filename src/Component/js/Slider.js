@@ -1,19 +1,58 @@
-import $ from 'jquery';
-function Slider(){
-    return(
-        
-        $(document).ready(function () {
-            $('.product-best-sale-slider').slick({
-                slidesToShow: 4,
-                autoplay: true,
-                autoplaySpeed: 1000,
-                ifinite: true,
-                dots: true,
-                prevArrow: "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
-                nextArrow: "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
-            });
-        })
-        
-    );
-}
-export default Slider;
+import React, { Component } from "react";
+    import Slider from "react-slick";
+    import "slick-carousel/slick/slick.css";
+    import "slick-carousel/slick/slick-theme.css";
+
+    export default class SliderShow extends Component {
+    constructor(props) {
+        super(props);
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
+    }
+    next() {
+        this.slider.slickNext();
+    }
+    previous() {
+        this.slider.slickPrev();
+    }
+    render() {
+        const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+        };
+        return (
+        <div>
+            <h2>Previous and Next methods</h2>
+            <Slider ref={c => (this.slider = c)} {...settings}>
+            <div key={1}>
+            </div>
+            <div key={2}>
+            </div>
+            <div key={3}>
+                
+            </div>
+            <div key={4}>
+                
+            </div>
+            <div key={5}>
+                
+            </div>
+            <div key={6}>
+                
+            </div>
+            </Slider>
+            <div style={{ textAlign: "center" }}>
+            <button className="button" onClick={this.previous}>
+                Previous
+            </button>
+            <button className="button" onClick={this.next}>
+                Next
+            </button>
+            </div>
+        </div>
+        );
+    }
+    }
