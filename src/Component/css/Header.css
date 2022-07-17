@@ -3,11 +3,10 @@
     --black-color: #000;
     --text-color: #333;
 }
-
-* {
-    box-sizing: inherit;
+*{
     text-decoration: none;
 }
+
 
 html {
     font-size: 62.5%;
@@ -68,6 +67,7 @@ html {
     height: 80px;
     width: 80%;
     margin: 0 auto;
+    
 }
 .header-nav-logo {
     width: 120px;
@@ -79,7 +79,7 @@ html {
     flex: 1;
     position: relative;
     height: 46px;
-    
+    z-index: 5;
 }
 .header-nav-menu-list {
     display: flex;
@@ -106,14 +106,17 @@ html {
     position: relative;
 }
 .login {
+    
     position: absolute;
     background-color: #fff;
     min-width: 120px;
     box-shadow: 1px 1px 0px #7f7f7f;
     /* margin-top: 2px; */
     display: none;
+    z-index: 5;
 }
 .login-item {
+    
     display: block;
     font-size: 1.6rem;
     color: #333;

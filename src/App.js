@@ -13,6 +13,7 @@ import Foot from './Component/js/Footer.js';
 import Head from './Component/js/Header.js';
 import Register from './Component/js/Register.js';
 import Login from './Component/js/Login.js';
+import Forgotpassword from './Component/js/forgotpassword';
 // import ShowProduct from './Component/js/ShowProduct.js';
 // import ClassRegister from './Component/js/ClassRegister.js';
 
@@ -24,6 +25,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+
 function App() {
   return (
     <div class="App">
@@ -32,10 +34,17 @@ function App() {
     <Route path="/" >
           <Head />
         </Route>
-        <Route exact path="/" >
+        <div className='homepage'>
+          
+          <Route exact path="/" >
           <Home />
         </Route>
+        </div>
+        
         <Switch>
+          <Route path="/forgotpassword">
+            <Forgotpassword/>
+          </Route>
         <Route path="/register">
           <Register />
         </Route>

@@ -1,0 +1,24 @@
+.container-slide {
+  padding: 40px;
+  width: 1620px;
+  height: inherit;
+}
+.img-item{
+  max-height: 580px;
+}
+.slick-slide img {
+  margin: auto;
+  width: 100%;
+  height: auto;
+  
+}
+.slick-prev{
+  position: relative;
+  left: 0; 
+}
+
+.slick-next
+{
+    right: 0; 
+}
+

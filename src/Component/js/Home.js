@@ -1,15 +1,16 @@
-import SliderShow from "./Slider";
+import SliderShow from './Slider.js'
 
 
 
-class Home extends Component {
-    render() {
+function Home() {
     return (
         <main>
             
             <div class="container">
 
-                <SliderShow/>
+                <div class="content-slideshow">
+                    <SliderShow/>
+                </div>
 
                 <div class="info-policy">
                     <div class="info-policy-content">
@@ -258,6 +259,5 @@ class Home extends Component {
         </main>
 
     );
-    }
 }
 export default Home;

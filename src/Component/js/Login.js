@@ -97,7 +97,7 @@ function Login() {
                             <span class="form-message"></span>
                         </div>
                         <div class="nav-register">
-                            <p><a href="">Quên mật khẩu?</a></p>
+                            <p><a href="/forgotpassword">Quên mật khẩu?</a></p>
                             <p><a href="/register">Bạn chưa có tài khoản?</a></p>
                         </div>
                         <div class="submit">
