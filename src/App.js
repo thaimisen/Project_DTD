@@ -17,7 +17,7 @@ import Forgotpassword from './Component/js/forgotpassword';
 // import ShowProduct from './Component/js/ShowProduct.js';
 // import ClassRegister from './Component/js/ClassRegister.js';
 
-// 
+// đạt commit
 import {
   BrowserRouter as Router,
   Switch,
