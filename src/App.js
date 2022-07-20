@@ -14,7 +14,8 @@ import Head from './Component/js/Header.js';
 import Register from './Component/js/Register.js';
 import Login from './Component/js/Login.js';
 import Forgotpassword from './Component/js/forgotpassword';
-// import ShowProduct from './Component/js/ShowProduct.js';
+import ShowProduct from './Component/js/ShowProduct';
+// import ShoppingCart from './Component/js/ShoppingCart';
 // import ClassRegister from './Component/js/ClassRegister.js';
 
 import {
@@ -29,43 +30,45 @@ import {
 function App() {
   return (
     <div class="App">
-    <Router>
-    <div >
-    <Route path="/" >
-          <Head />
-        </Route>
-        <div className='homepage'>
-          
-          <Route exact path="/" >
-          <Home />
-        </Route>
-        </div>
-        
-        <Switch>
-          <Route path="/forgotpassword">
-            <Forgotpassword/>
+      <Router>
+        <div >
+          <Route path="/" >
+            <Head />
           </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        {/* <Route path="/showproduct">
-          <ShowProduct />
-        </Route> */}
-        </Switch>
-      
-      <Route path="/" >
-          <Foot />
-        </Route>
+         
+            <Route exact path="/" >
+              <Home />
+            </Route>
+   
 
-        
+          <Switch>
+            <Route path="/forgotpassword">
+              <Forgotpassword />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/showproduct">
+              <ShowProduct />
+            </Route>
+            {/* <Route path="/shoppingcart">
+              <ShoppingCart />
+            </Route> */}
+          </Switch>
+
+          <Route path="/" >
+            <Foot />
+          </Route>
+
+
+        </div>
+      </Router>
+
     </div>
-  </Router>
-  
-  </div>
-);
+  );
 }
 
 

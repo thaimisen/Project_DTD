@@ -2,6 +2,7 @@
 .container {
     z-index: -1;
     overflow: hidden;
+    /* height: 3600px; */
 }
 /* slideshow */
 
@@ -31,10 +32,7 @@
     padding-right: 10px;
 }
 /* product */
-.container-product {
-    width: 1260px;
-    margin: 0 auto;
-}
+
 .product-new-title {
     height: 100px;
     display: flex;
@@ -74,8 +72,10 @@
 }
 /* xem thêm */
 .see-more {
+    display: block;
     text-align: center;
     height: 60px;
+    width: 100%;
 }
 .see-more-text {
     text-align: center;
@@ -109,6 +109,11 @@
 /* --------------- */
 .header-seacrh {
     position: relative;
+}
+.container-product{
+    /* width: 80%; */
+    margin: 0 auto;
+    padding: 20px 0 0 0;
 }
 .header-search-input{
     min-width: 260px;
@@ -157,15 +162,5 @@
     display: flex;
     justify-content: center;
 }
-.product-best-sale-slider {
-    height: 580px;
-}
 
-.product-best-sale-slider-img {
-    margin: 0 10px;
-}
-.product-best-sale-slider-img-item {
-    height: 100%;
-    width: 100%;
-}
 /* css slick */
