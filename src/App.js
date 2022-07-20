@@ -4,8 +4,8 @@ import './Component/css/Home.css'
 import './Component/css/Header.css'
 import './Component/css/Register.css'
 import './Component/css/Login.css'
-
-
+import './Component/css/ForgotAccount.css';
+import { createRoot } from 'react-dom/client';
 
 import React from "react";
 import Home from './Component/js/Home.js';

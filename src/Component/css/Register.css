@@ -14,7 +14,19 @@
     width: 500px;
     margin: 50px auto 50px;
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 10px 20px 30px 20px;
+}
+#formregister {
+    width: 500px;
+    margin: 50px auto 50px;
+    background-color: #fff;
+    padding: 10px 20px 30px 20px;
+}
+#formlogin {
+    width: 500px;
+    margin: 50px auto 50px;
+    background-color: #fff;
+    padding: 10px 20px 30px 20px;
 }
 
 .title {
@@ -76,6 +88,7 @@
     font-weight: 600;
     border: 1px solid rgb(184, 178, 178);
     font-size: medium;
+    
 }
 .form-group-gender{
     display: flex;
