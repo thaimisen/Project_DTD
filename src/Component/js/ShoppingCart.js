@@ -1,5 +1,5 @@
 
-// import '/reactjs/Project_DTD/src/Component/css/ShoppingCart.css'
+import '/reactjs/Project_DTD/src/Component/css/ShoppingCart.css'
 function ShoppingCart(){
     return(
         <main>

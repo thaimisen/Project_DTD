@@ -101,7 +101,7 @@ function Head() {
                         </div>
                     </div>
                     <div class="header-cart">
-                        <a href="/"><i class="fa-solid fa-cart-shopping header-nav-right-icon"></i></a>
+                        <a href="/shoppingcart"><i class="fa-solid fa-cart-shopping header-nav-right-icon"></i></a>
                     </div>
                 </div>
             </div>

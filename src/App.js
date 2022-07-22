@@ -15,7 +15,7 @@ import Register from './Component/js/Register.js';
 import Login from './Component/js/Login.js';
 import Forgotpassword from './Component/js/forgotpassword';
 import ShowProduct from './Component/js/ShowProduct';
-// import ShoppingCart from './Component/js/ShoppingCart';
+import ShoppingCart from './Component/js/ShoppingCart.js';
 // import ClassRegister from './Component/js/ClassRegister.js';
 
 import {
@@ -35,11 +35,11 @@ function App() {
           <Route path="/" >
             <Head />
           </Route>
-         
-            <Route exact path="/" >
-              <Home />
-            </Route>
-   
+
+          <Route exact path="/" >
+            <Home />
+          </Route>
+
 
           <Switch>
             <Route path="/forgotpassword">
@@ -54,9 +54,12 @@ function App() {
             <Route path="/showproduct">
               <ShowProduct />
             </Route>
-            {/* <Route path="/shoppingcart">
+            <Route path="/shoppingcart">
               <ShoppingCart />
-            </Route> */}
+            </Route>
+            <Route path="/detail/:id">
+              <Detail />
+            </Route>
           </Switch>
 
           <Route path="/" >
@@ -71,6 +74,12 @@ function App() {
   );
 }
 
+function Detail() {
+  let { id } = useParams();
+  return (
+    <h2>Detail{id}</h2>
+  )
+}
 
 
 

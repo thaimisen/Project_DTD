@@ -1,11 +1,11 @@
-// .container-slide-2 {
-//     padding: 40px;
-//     max-height: 1050px;
-//   }
 
-// .product-best-sale-slider-item {
-//     margin: 5px 10px;
-// }
+
+.product-best-sale-slider {
+    height: 650px;
+}
+.container-slide-2 {
+    height: 650px;
+}
 .product-best-sale-slider-img img{
     width: auto;
 }
@@ -36,9 +36,7 @@
     display: flex;
     justify-content: center;
 }
-.product-best-sale-slider {
-    height: 580px;
-}
+
 
 .product-best-sale-slider-img {
     margin: 0 10px;

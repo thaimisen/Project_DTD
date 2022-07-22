@@ -1,4 +1,4 @@
-export default Foot;
+import '../css/Footer.css'
 function Foot() {
     // The <Route> that rendered this component has a
     // path of `/topics/:topicId`. The `:topicId` portion
@@ -78,3 +78,4 @@ function Foot() {
     </footer>
     );
     }
+    export default Foot;

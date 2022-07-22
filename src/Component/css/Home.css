@@ -2,7 +2,7 @@
 .container {
     z-index: -1;
     overflow: hidden;
-    /* height: 3600px; */
+    /* height: 5000px; */
 }
 /* slideshow */
 
@@ -13,6 +13,7 @@
 
 /* info polyci */
 .info-policy {
+    margin-top: 40px;
     height: 85px;
     display: flex;
     align-items: center;
