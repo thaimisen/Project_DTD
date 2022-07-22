@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Slider from "react-slick";
 import "/reactjs/Project_DTD/src/Component/css/Slider.scss";
 import "slick-carousel/slick/slick.css";
-import "D:/reactjs/Project_DTD/src/Component/css/slick-theme.scss";
+import "/reactjs/Project_DTD/src/Component/css/slick-theme.scss"
 
 
 class SliderShow extends React.Component {

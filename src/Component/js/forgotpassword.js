@@ -1,81 +1,72 @@
+
 import React from "react";
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link,
-    useRouteMatch,
-    useParams
+    Route
 } from "react-router-dom";
-import 'D:/reactjs/Project_DTD/src/Component/css/ForgotPassword.css'
-
-// import Forgot from "./forgot.js";
 
 function Forgotpassword() {
 
     return (
         <Router>
+            <Switch>
             <Route path="/">
                 <Forgot />
             </Route>
-            <Route path="/forgot-con">
+            <Route path="forgotcon">
                 <Continue />
             </Route>
+            </Switch>
         </Router>
     );
 }
 function Forgot() {
     return (
-        <div className="body">
-            <div className="main">
-            </div>
-            <div class="block-form">
-                <form id="form" action="" >
-                    <div class="title">
-                        <h2>Quên mật khẩu</h2>
-                        <p class="lable">Nhập Email đã đăng kí tài khoản để lấy lại mật khẩu mới</p>
-                    </div>
+        <div class="block-form">
+            <form id="form" action="" >
+                <div class="title">
+                    <h2>Quên mật khẩu</h2>
+                    <p class="pmota">Nhập Email đã đăng kí tài khoản để lấy lại mật khẩu mới</p>
+                </div>
 
-                    <div class="form-group-email">
-                        <label class="lable">Email:</label>
-                        <input type="text" id="email" class="form-input" ></input>
-                        <span id="messageEmail" class="form-message"></span>
-                    </div>
-                    <div class="submit-ctn">
-                        <button class="btn-submit" type="submit" ><a href="/forgot-con" >Continue</a></button>
-                    </div>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label class="lable">Email:</label>
+                    <input type="text" id="email" class="form-input" ></input>
+                    <span id="messageEmail" class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn-submit" type="submit" ><a href="forgotcon" class="aforgot">Tiếp tục</a></button>
+                </div>
+            </form>
         </div>
     )
 }
-
 function Continue() {
-    let { path, url } = useRouteMatch();
-
     return (
-        <div>
-            <li>
-                <Link to={`${url}/rendering`}>Rendering with React</Link>
-            </li>
-            <Switch>
-                <Route path={`${path}/:forgotID`}>
-                    <Content />
-                </Route>
-            </Switch>
-        </div>
-    );
-}
 
-function Content() {
-    let { forgotID } = useParams();
+        <div class="block-form">
+            <form id="form" action="" >
+                <div class="title">
+                    <h2>Chúng tôi đã gửi mã của bạn đến :</h2>
+                    <p class="pmota">Vui lòng kiểm tra mã trong Email của bạn </p>
+                </div>
 
-    return (
-        <div>
-            <h3>{forgotID}</h3>
+                <div class="form-group">
+                    <label class="lable">Mã xác nhận:</label>
+                    <input type="text" id="maxacnhan" class="form-input" ></input>
+                    <span id="messageEmail" class="form-message"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn-submit" type="submit" ><a href="" class="tieptuc">Tiếp tục</a></button>
+                </div>
+            </form>
         </div>
+
     );
+    
 }
 export default Forgotpassword;
+
 
 
