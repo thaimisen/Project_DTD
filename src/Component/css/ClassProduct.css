@@ -1,0 +1,40 @@
+#error{
+    color: red;
+}
+#frmDangKy button {
+  margin-top: 20px;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+}
+.btn-primary {
+  width: 200px;
+  margin-right: 42px;
+  margin-top: 20px;
+  background-color: rgb(230, 230, 230);
+  color: rgb(61, 61, 61);
+}
+.btn-edit{
+  width: 100px;
+  display: flex;
+}
+.btn-primary:hover{
+    background-color: rgb(187, 185, 185);
+}
+.btn-primary:focus{
+    background-color: rgb(187, 185, 185);
+}
+.wrapper {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.col-md-9{
+    margin-left: 13%;
+}
+.table-striped{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+

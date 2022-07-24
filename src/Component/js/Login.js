@@ -2,13 +2,10 @@ import User from './Register';
 
 export default Login;
 
-
-
 function Login() {
 
   return (
     <div className="body">
-
       <main>
         <div class="block-form-login">
           <form id="formlogin" action="">
@@ -32,7 +29,6 @@ function Login() {
             </div>
             <div class="submit">
               <button class="btn-submit" type="submit" onClick={signin}>Đăng nhập </button>
-             
             </div>
             <div> <span id='thongbao'></span></div>
           </form>
@@ -151,7 +147,7 @@ function signin() {
       if (ischeck) {
         // document.getElementById('thongbao').innerHTML='Đăng nhập thành công'
         alert('đăng nhập thành công')
-        window.location.href = "/";
+        window.location.href = "/classproduct";
         // if (role = 'admin') {
         //   window.location.href = "http://127.0.0.1:5500/asmgd2/admin_khongkt/form_adminkhongkt_html.html";
         // }

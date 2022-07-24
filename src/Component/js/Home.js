@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+
 import SliderShow from './Slider.js'
 import SliderShow2 from './Slider2.js';
 import '/reactjs/Project_DTD/src/Component/css/Home.css'
 import { useState } from 'react';
-
+import { useEffect } from 'react';
 function Home() {
     const [data, setdata] = useState([]);
     useEffect(() => {
@@ -59,7 +59,7 @@ function Home() {
                             </div>
                             {data.map(item =>
                                 <div class="grid__row" id="home">
-                                    <a href="/detail" class="grid-column-content">
+                                    <a href="/showproduct" class="grid-column-content">
                                         <div class="grid__column">
                                             <div class="grid-column-content-img">
                                                 <img class="grid-column-item-img" src={process.env.PUBLIC_URL + '/images' + item.hinh}></img>

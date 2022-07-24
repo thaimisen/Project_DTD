@@ -7,7 +7,8 @@ import './Component/css/Login.css'
 import './Component/css/ForgotAccount.css';
 import { createRoot } from 'react-dom/client';
 
-import React from "react";
+
+import React, { Component } from 'react'
 import Home from './Component/js/Home.js';
 import Foot from './Component/js/Footer.js';
 import Head from './Component/js/Header.js';
@@ -16,6 +17,7 @@ import Login from './Component/js/Login.js';
 import Forgotpassword from './Component/js/forgotpassword';
 import ShowProduct from './Component/js/ShowProduct';
 import ShoppingCart from './Component/js/ShoppingCart.js';
+import ClassProduct from './Component/js/ClassProduct';
 // import ClassRegister from './Component/js/ClassRegister.js';
 
 // đạt commit
@@ -37,30 +39,15 @@ function App() {
             <Head />
           </Route>
 
-          <Route exact path="/" >
-            <Home />
-          </Route>
-
-
           <Switch>
-            <Route path="/forgotpassword">
-              <Forgotpassword />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/showproduct">
-              <ShowProduct />
-            </Route>
-            <Route path="/shoppingcart">
-              <ShoppingCart />
-            </Route>
-            <Route path="/detail/:id">
-              <Detail />
-            </Route>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/forgotpassword' component={Forgotpassword} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/showproduct' component={ShowProduct} />
+          <Route exact path='/classproduct' component={ClassProduct} />
+            <Route exact path='/shoppingcart' component={ShoppingCart} />
+            <Route exact path='/detail:id' component={Detail} />
           </Switch>
 
           <Route path="/" >
