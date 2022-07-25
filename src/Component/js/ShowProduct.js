@@ -1,6 +1,6 @@
 
 
-import '/reactjs/Project_DTD/src/Component/css/ShowProduct.css'
+
 import productcode from './ProductCode';
 import React, {Component} from 'react';
 
@@ -67,6 +67,9 @@ import React, {Component} from 'react';
                         {/* <button onClick={addProductCart()}>Thêm vào giỏ hàng</button> */}
                         <button>Mua Ngay</button>
                     </div>
+                    <div className="product-right-quantity">
+                        <a href='/' className='return'><span className='return-span'>Quay lại</span></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,13 +128,14 @@ function btnSize() {
     var x = document.querySelectorAll('.btnSize');
     const $ = document.querySelector.bind(document);
     x.forEach(function (size, index) {
-        size.onclick = function () {
+        size.onClick = function () {
             $('.btnSize.btn-active-size').classList.remove('btn-active-size')
             this.classList.add('btn-active-size')
         }
     })
 }
 btnSize();
+
 
 // class SanPham {
 //     constructor(ten, hinhanh, gia, soluong) {
@@ -204,7 +208,7 @@ btnSize();
 //                             <span>X</span>
 //                             <span id="cart-gia">${item.gia}</span>
 //                             <br></br>
-//                             <button onclick="deleteProductCart('${item.ten}')">Xoá</button>
+//                             <button onClick="deleteProductCart('${item.ten}')">Xoá</button>
 //                         </div>
 //                 </div>
 //             </li> `

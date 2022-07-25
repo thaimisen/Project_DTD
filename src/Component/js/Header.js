@@ -22,7 +22,7 @@ function Head() {
 
             <div class="header-nav">
                 <div class="header-nav-logo">
-                    <Link to=""><img src="/img/logo2.png" alt="" class="logo"></img></Link>
+                    <Link to=""><img src="/img/logo2.png" alt="" className="logo"></img></Link>
                 </div>
                 <div class="header-nav-menu">
                     <ul class="header-nav-menu-list">
@@ -110,3 +110,4 @@ function Head() {
 
     );
 }
+

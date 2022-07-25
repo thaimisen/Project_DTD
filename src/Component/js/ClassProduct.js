@@ -1,12 +1,13 @@
 import '../css/ClassProduct.css';
 import { Modal } from "react-bootstrap";
-import React, { Component } from 'react';
-import { useTable } from "react-table";
+import React from 'react';
 
 
 
-function ClassProduct() {
+function ClassProduct(e) {
+
     return (
+
         <div className="body">
 
             <div class="container">
@@ -26,7 +27,7 @@ function ClassProduct() {
                         <button type="button" class="btn btn-primary" id="btn-search" >
                             Search
                         </button>
-                        {/* <a href="ass-admin.html"class="btn btn-primary" id ="btn-Down">Home</a> */}
+                        <a href="/" class="btn btn-primary" id="btn-Down">Home</a>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -85,7 +86,7 @@ function ClassProduct() {
                             </div>
                         </div>
                         {/* <!-- edit form--> */}
-                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1}  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -130,8 +131,9 @@ function ClassProduct() {
                 </div>
             </div>
         </div>
+        
     );
-
+    
 }
 class Product {
     constructor(id, name, price, image) {
@@ -162,7 +164,6 @@ class StoreProduct {
         return true
     }
     update(product) {
-        let vt = -1;
         for (let i = 0; i < this.products.length; i++) {
             const currentProduct = this.products[i];
             if (currentProduct.id === product.id) {
@@ -171,7 +172,6 @@ class StoreProduct {
             }
         }
         //c1 
-
         return false
     }
     getById(id) {
@@ -197,7 +197,7 @@ class StoreProduct {
     }
     save() {
 
-        const data = JSON.stringify(this.list)
+        const data = JSON.stringify(this.getProduct())
         localStorage.setItem('products', data)
 
     }
@@ -226,11 +226,11 @@ class StoreProduct {
 }
 
 const store = new StoreProduct();
-
 store.getData()
 
 
 function renderTable(products) {
+
     let content = ''
     for (let i = 0; i < products.length; i++) {
         const item = products[i];
@@ -241,20 +241,20 @@ function renderTable(products) {
                 <td>${item.price}</td>
                 <td width="231px"><img src="${item.image}"width=230px height=130px /></td>
                 <td>
-                <button type="button" class="btn btn-edit" onclick="onEdit(${item.id})">edit</button>
+                <button type="button" class="btn btn-edit" onClick={onEdit(${item.id})}>edit</button>
                 <br>
-                <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
+                <button type="button" class="btn btn-danger" onClick={onRemove(${item.id})}>remove</button>
                 <br>
                 </td>
             </tr>
             `
     }
     if (document.getElementById('tableBody')) {
-
         document.getElementById('tableBody').innerHTML = content
+
     }
 }
-renderTable(store.getProduct())
+// renderTable(store.getProduct())
 
 
 function renderProductHome(store) {
@@ -276,17 +276,16 @@ function renderProductHome(store) {
         </div>`
     }
     if (document.getElementById('home')) {
-
         document.getElementById('home').innerHTML = content
+
     }
 }
-
-
-renderProductHome(store.getProduct())
+// renderProductHome(store.getProduct())
 
 
 document.getElementById('frmProductCreate') && document.getElementById('frmProductCreate').addEventListener('submit', function (event) {
-    window.event.preventDefault();
+    // event.preventDefault();
+
     const id = document.getElementById('id').value;
     const name = document.getElementById('name').value;
     const image = document.getElementById('image').value;
@@ -294,11 +293,10 @@ document.getElementById('frmProductCreate') && document.getElementById('frmProdu
 
     const error = validate({ id, name, price, image })
     if (error.length > 0) {
-        document.getElementById('error').innerHTML = error.join('<br>')
+        document.getElementById('error').InnerHTML = error.join('<br>')
         return
     }
-
-    if (name === '' || price === '' || image === '' || id === '') {
+    if (name == '' || price == '' || image == '' || id == '') {
         alert('điền đầy đủ thông tin')
         return
     }
@@ -308,6 +306,7 @@ document.getElementById('frmProductCreate') && document.getElementById('frmProdu
         alert('Thêm thành công')
         store.save();
         renderTable(store.getProduct())
+
     } else {
         alert('Thêm thất bại')
     }
@@ -315,14 +314,15 @@ document.getElementById('frmProductCreate') && document.getElementById('frmProdu
 })
 
 
+
 document.getElementById('frmProductEdit') && document.getElementById('frmProductEdit').addEventListener('submit', function (event) {
-    window.event.preventDefault();
+    event.preventDefault();
     const id = document.getElementById('prodId').value;
     const name = document.getElementById('prodName').value;
     const image = document.getElementById('prodImage').value;
     const price = document.getElementById('prodPrice').value;
 
-    if (name === '' || price === '' || image === '' || id === '') {
+    if (name == '' || price == '' || image == '' || id == '') {
         alert('điền đầy đủ thông tin')
         return
     }
@@ -331,17 +331,16 @@ document.getElementById('frmProductEdit') && document.getElementById('frmProduct
     if (isCreate) {
         alert('Cập nhật thành công')
         store.save();
-
         renderTable(store.getProduct())
 
     } else {
         alert('Cập nhật thất bại')
     }
 
+
 })
 
-
-export function onRemove(id) {
+function onRemove(id) {
     const confirmAction = window.confirm("bạn có muốn xoá product id: " + id);
     if (confirmAction) {
         const isRemove = store.remove(`${id}`);
@@ -355,7 +354,8 @@ export function onRemove(id) {
     }
 }
 
-export function onEdit(id) {
+
+function onEdit(id) {
 
     var myModal = new Modal(document.getElementById('modalProductEdit'), {
         keyboard: false
@@ -369,6 +369,7 @@ export function onEdit(id) {
     }
     myModal.show();
 }
+
 
 function isValidURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -403,7 +404,10 @@ function validate({ id, name, price, image }) {
 window.addEventListener('load', function (e) {
     renderTable(store.getProduct())
     renderProductHome(store.getProduct())
+    e.preventDefault();
 })
+
+
 // document.getElementById('btn-Up').addEventListener('click',function(e){
 //     store.sapXepgia(true)
 //     store.save()

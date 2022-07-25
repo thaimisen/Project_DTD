@@ -5,7 +5,7 @@ import './Component/css/Header.css'
 import './Component/css/Register.css'
 import './Component/css/Login.css'
 import './Component/css/ForgotAccount.css';
-import { createRoot } from 'react-dom/client';
+import '/reactjs/Project_DTD/src/Component/css/ShowProduct.css'
 
 
 import React, { Component } from 'react'
@@ -19,6 +19,7 @@ import ShowProduct from './Component/js/ShowProduct';
 import ShoppingCart from './Component/js/ShoppingCart.js';
 import ClassProduct from './Component/js/ClassProduct';
 // import ClassRegister from './Component/js/ClassRegister.js';
+
 
 // đạt commit
 import {
@@ -39,7 +40,7 @@ function App() {
             <Head />
           </Route>
 
-          <Switch>
+          {/* <Switch> */}
           <Route exact path='/' component={Home} />
           <Route exact path='/forgotpassword' component={Forgotpassword} />
           <Route exact path='/register' component={Register} />
@@ -48,7 +49,7 @@ function App() {
           <Route exact path='/classproduct' component={ClassProduct} />
             <Route exact path='/shoppingcart' component={ShoppingCart} />
             <Route exact path='/detail:id' component={Detail} />
-          </Switch>
+          {/* </Switch> */}
 
           <Route path="/" >
             <Foot />
