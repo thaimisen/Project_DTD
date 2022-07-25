@@ -43,35 +43,9 @@ function Home() {
                     <div class="container-product">
                         <div class="grid">
                             <div class="grid__row" id="home">
-                                <div class="grid__column">
-                                    <a href="showproduct" class="grid-column-content">
-                                        <div class="grid-column-content-img">
-                                            <img src="/img/product0.jpg" alt="" class="grid-column-item-img"></img>
-
-                                        </div>
-                                        <div class="grid-column-content-item">
-                                            <a class="grid-column-content-name" href="">Áo Thun ICON DENIM Colorful
-                                                Orgnls</a>
-                                            <p class="grid-column-content-price">280,000đ</p>
-                                        </div>
-                                    </a>
-                                </div>
+                                
                             </div>
-                            {data.map(item =>
-                                <div class="grid__row" id="home">
-                                    <a href="/showproduct" class="grid-column-content">
-                                        <div class="grid__column">
-                                            <div class="grid-column-content-img">
-                                                <img class="grid-column-item-img" src={process.env.PUBLIC_URL + '/images' + item.hinh}></img>
-                                            </div>
-                                            <div class="grid-column-content-item">
-                                                <p class="grid-column-content-name">{item.id}-{item.name}</p>
-                                                <p class="grid-column-content-price">{item.gia}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            )}
+                            
                         </div>
                         <div class="see-more">
                             <a class="see-more-text" href="">Xem Thêm</a>
@@ -212,4 +186,6 @@ function Home() {
 
     );
 }
+  
+
 export default Home;

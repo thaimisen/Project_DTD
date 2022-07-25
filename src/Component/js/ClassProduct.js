@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import React, { Component } from 'react';
 import { useTable } from "react-table";
 
+
+
 function ClassProduct() {
     return (
         <div className="body">
@@ -30,7 +32,7 @@ function ClassProduct() {
                                 <tr>
                                     <th>id</th>
                                     <th>name</th>
-                                    <th>description</th>
+                                    {/* <th>description</th> */}
                                     <th>price</th>
                                     <th>image</th>
                                     <th></th>
@@ -41,7 +43,7 @@ function ClassProduct() {
                             </tbody>
                         </table>
 
-                        <div class="modal fade" id="frmProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="frmProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -66,10 +68,10 @@ function ClassProduct() {
                                                 <label for="exampleInputPassword1" class="form-label">image</label>
                                                 <input type="text" class="form-control" id="image"></input>
                                             </div>
-                                            <div class="mb-3">
+                                            {/* <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">description</label>
                                                 <textarea class="form-control" type="text" className="form-control" id="description"></textarea>
-                                            </div>
+                                            </div> */}
                                             <button type="submit" class="btn btn-primary btn-submit" value="add">ADD</button>
                                             <div>
                                                 <p id="error"></p>
@@ -83,7 +85,7 @@ function ClassProduct() {
                             </div>
                         </div>
                         {/* <!-- edit form--> */}
-                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1}  aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -108,10 +110,10 @@ function ClassProduct() {
                                                 <label for="exampleInputPassword1" class="form-label">image</label>
                                                 <input type="text" class="form-control" id="prodImage"></input>
                                             </div>
-                                            <div class="mb-3">
+                                            {/* <div class="mb-3">
                                                 <label for="exampleInputPassword1" class="form-label">description</label>
                                                 <textarea class="form-control" type="text" className="form-control" id="prodDescription"></textarea>
-                                            </div>
+                                            </div> */}
                                             <button type="submit" class="btn btn-primary btn-submit" value="add">Change</button>
                                             <div>
                                             </div>
@@ -132,190 +134,218 @@ function ClassProduct() {
 
 }
 class Product {
-    constructor(id, name, price, description, image) {
-        this.id=  id;
+    constructor(id, name, price, image) {
+        this.id = id;
         this.name = name;
         this.price = price;
-        this.description = description;
         this.image = image;
     }
-    getName(){
+    getName() {
         return this.name;
     }
-    getId(){
+    getId() {
         return this.id;
     }
-    }
-    class StoreProduct {
-        constructor() {
+}
+class StoreProduct {
+    constructor() {
         this.products = [];
-        }
-        add(product) {
-        for(let i = 0; i < this.products.length; i++) {
+    }
+    add(product) {
+        for (let i = 0; i < this.products.length; i++) {
             const currentProduct = this.products[i];
-            if(currentProduct.id === product.id) {
-            return false
+            if (currentProduct.id === product.id) {
+                return false
             }
         }
         this.products.push(product)
         return true
-        }
-        update(product) {
+    }
+    update(product) {
         let vt = -1;
-        for(let i = 0; i < this.products.length; i++) {
+        for (let i = 0; i < this.products.length; i++) {
             const currentProduct = this.products[i];
-            if(currentProduct.id === product.id) {
-            this.products[i]=product
-            return true
+            if (currentProduct.id === product.id) {
+                this.products[i] = product
+                return true
             }
         }
         //c1 
-       
+
         return false
-        }
-        getById(id) {
-        for(let i = 0; i < this.products.length; i++) {
+    }
+    getById(id) {
+        for (let i = 0; i < this.products.length; i++) {
             const currentProduct = this.products[i];
-            if(currentProduct.id == id) {
-            return currentProduct
+            if (currentProduct.id == id) {
+                return currentProduct
             }
         }
         //c1 
         return null
-        }
-        remove(id) {
+    }
+    remove(id) {
         console.log(this.products)
-        for(let i = 0; i < this.products.length; i++) {
+        for (let i = 0; i < this.products.length; i++) {
             const currentProduct = this.products[i];
-            if(currentProduct.id == id) {
-            this.products.splice(i, 1)
-            return true
+            if (currentProduct.id == id) {
+                this.products.splice(i, 1)
+                return true
             }
         }
         return false
-        }
-        save() {
-            if(this.products.length > 0) {
-            const data = JSON.stringify(this.products)
-            localStorage.setItem('products', data)
-            }
-        }
-        getData() {
+    }
+    save() {
+
+        const data = JSON.stringify(this.list)
+        localStorage.setItem('products', data)
+
+    }
+    getData() {
         const data = JSON.parse(localStorage.getItem('products'))
-        if(data) {
+        if (data) {
             const listProduct = []
-            for(let i =0; i < data.length; i++) {
-            const user = new Product(data[i].id, data[i].name, data[i].price, data[i].description, data[i].image)
-            listProduct.push(user)
+            for (let i = 0; i < data.length; i++) {
+                const user = new Product(data[i].id, data[i].name, data[i].price, data[i].image)
+                listProduct.push(user)
             }
             this.products = listProduct
         }
-        }
-    
-        getProduct() {
+    }
+
+    getProduct() {
         return this.products
-        }
-        sapXepgia(type=true){
-            if(type){
-                this.products.sort((a,b) => {return a.price -b.price})
-            }else{
-                this.products.sort((a,b) => {return b.price -a.price})
-            }
+    }
+    sapXepgia(type = true) {
+        if (type) {
+            this.products.sort((a, b) => { return a.price - b.price })
+        } else {
+            this.products.sort((a, b) => { return b.price - a.price })
         }
     }
-    
-    const store = new StoreProduct();
-    
-    store.getData()
+}
+
+const store = new StoreProduct();
+
+store.getData()
 
 
-    function renderTable(products) {
-        let content = ''
-        for(let i = 0; i < products.length; i++) {
-            const item = products[i];
-            content += `
+function renderTable(products) {
+    let content = ''
+    for (let i = 0; i < products.length; i++) {
+        const item = products[i];
+        content += `
             <tr>
                 <td>${item.id}</td>
                 <td>${item.name}</td>
-                <td>${item.description}</td>
                 <td>${item.price}</td>
                 <td width="231px"><img src="${item.image}"width=230px height=130px /></td>
                 <td>
-                <button type="button" class="btn btn-edit" onClick={onEdit(${item.id})}>edit</button>
+                <button type="button" class="btn btn-edit" onclick="onEdit(${item.id})">edit</button>
                 <br>
-                <button type="button" class="btn btn-danger" onClick={onRemove(${item.id})}>remove</button>
+                <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
                 <br>
                 </td>
             </tr>
             `
-        }
-        if(document.getElementById('tableBody')){
-            document.getElementById('tableBody').innerHTML = content
-        }
     }
-    renderTable(store.getProduct())
+    if (document.getElementById('tableBody')) {
+
+        document.getElementById('tableBody').innerHTML = content
+    }
+}
+renderTable(store.getProduct())
 
 
-    document.getElementById('frmProductCreate')&&document.getElementById('frmProductCreate').addEventListener('submit', function(event){
-        event.preventDefault();
-        const id = document.getElementById('id').value;
-        const name = document.getElementById('name').value;
-        const description = document.getElementById('description').value;
-        const image = document.getElementById('image').value;
-        const price = document.getElementById('price').value;
-    
-        const error = validate({id,name,price,description,image})
-        if(error.length>0){
-            document.getElementById('error').innerHTML=error.join('<br>')
-            return
-        }
-    
-        if(name === '' || description === '' || price === '' || image === '' || id === '') {
-            alert('điền đầy đủ thông tin')
+function renderProductHome(store) {
+
+    let content = ''
+    for (let i = 0; i < store.length; i++) {
+        const item = store[i];
+        content += `
+        <div class="grid__column">
+            <a href="/showproduct?id=${item.id}" className="grid-column-content">
+                 <div class="grid-column-content-img">
+                    <img src="${item.image}" alt="" className="grid-column-item-img">
+                </div>
+                <div class="grid-column-content-item">
+                    <p class="grid-column-content-name">${item.name}</p>
+                    <p class="grid-column-content-price">${item.price}</p>
+                </div>
+            </a>
+        </div>`
+    }
+    if (document.getElementById('home')) {
+
+        document.getElementById('home').innerHTML = content
+    }
+}
+
+
+renderProductHome(store.getProduct())
+
+
+document.getElementById('frmProductCreate') && document.getElementById('frmProductCreate').addEventListener('submit', function (event) {
+    window.event.preventDefault();
+    const id = document.getElementById('id').value;
+    const name = document.getElementById('name').value;
+    const image = document.getElementById('image').value;
+    const price = document.getElementById('price').value;
+
+    const error = validate({ id, name, price, image })
+    if (error.length > 0) {
+        document.getElementById('error').innerHTML = error.join('<br>')
         return
-        }
-        const product = new Product(id, name, price, description, image);
-        const isCreate = store.add(product);
-        if(isCreate) {
-            alert('Thêm thành công')
-            store.save();
-            renderTable(store.getProduct())
-        } else {
-            alert('Thêm thất bại')
-        }
-    
-    })
-    
-    document.getElementById('frmProductEdit')&&document.getElementById('frmProductEdit').addEventListener('submit', function(event){
-    event.preventDefault();
-    const id = document.getElementById('prodId').value;
-    const name = document.getElementById('prodName').value;
-    const description = document.getElementById('prodDescription').value;
-    const image = document.getElementById('prodImage').value;
-    const price = document.getElementById('prodPrice').value;
-    
-    if(name === '' || description === '' || price === '' || image === '' || id === '') {
+    }
+
+    if (name === '' || price === '' || image === '' || id === '') {
         alert('điền đầy đủ thông tin')
         return
     }
-    const product = new Product(id, name, price, description, image);
-    const isCreate = store.update(product);
-    if(isCreate) {
-        alert('Cập nhật thành công')
+    const product = new Product(id, name, price, image);
+    const isCreate = store.add(product);
+    if (isCreate) {
+        alert('Thêm thành công')
         store.save();
         renderTable(store.getProduct())
     } else {
+        alert('Thêm thất bại')
+    }
+
+})
+
+
+document.getElementById('frmProductEdit') && document.getElementById('frmProductEdit').addEventListener('submit', function (event) {
+    window.event.preventDefault();
+    const id = document.getElementById('prodId').value;
+    const name = document.getElementById('prodName').value;
+    const image = document.getElementById('prodImage').value;
+    const price = document.getElementById('prodPrice').value;
+
+    if (name === '' || price === '' || image === '' || id === '') {
+        alert('điền đầy đủ thông tin')
+        return
+    }
+    const product = new Product(id, name, price, image);
+    const isCreate = store.update(product);
+    if (isCreate) {
+        alert('Cập nhật thành công')
+        store.save();
+
+        renderTable(store.getProduct())
+
+    } else {
         alert('Cập nhật thất bại')
     }
-    
-    })
-    
-    
-    function onRemove(id) {
-    const confirmAction = window.confirm("bạn có muốn xoá product id: "+id);
+
+})
+
+
+export function onRemove(id) {
+    const confirmAction = window.confirm("bạn có muốn xoá product id: " + id);
     if (confirmAction) {
         const isRemove = store.remove(`${id}`);
-        if(isRemove) {
+        if (isRemove) {
             alert('Xoá thành công')
             store.save();
             renderTable(store.getProduct())
@@ -323,71 +353,72 @@ class Product {
             alert('Xoá thất bại')
         }
     }
+}
+
+export function onEdit(id) {
+
+    var myModal = new Modal(document.getElementById('modalProductEdit'), {
+        keyboard: false
+    })
+    const product = store.getById(`${id}`);
+    if (product) {
+        document.getElementById('prodId').value = product.id;
+        document.getElementById('prodName').value = product.name;
+        document.getElementById('prodImage').value = product.image;
+        document.getElementById('prodPrice').value = product.price;
     }
-    
-    function onEdit(id) {
-    
-        var myModal = new Modal(document.getElementById('modalProductEdit'), {
-            keyboard: false
-        })
-        const product = store.getById(`${id}`);
-        if(product) {
-            document.getElementById('prodId').value = product.id;
-            document.getElementById('prodName').value = product.name;
-            document.getElementById('prodDescription').value = product.description;
-            document.getElementById('prodImage').value = product.image;
-            document.getElementById('prodPrice').value = product.price;
-        }
-        myModal.show();
+    myModal.show();
+}
+
+function isValidURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return !!pattern.test(str);
+}
+
+function validate({ id, name, price, image }) {
+    let error = [];
+    if (id == '' || isNaN(id)) {
+        error.push('id is invalid')
     }
-    
-    function isValidURL(str) {
-        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-          '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-          '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-          '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-          '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-          '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-        return !!pattern.test(str);
+    if (name == '') {
+        error.push('name is not empty')
     }
-    
-    function validate({id,name,price,description,image}){
-        let error = [];
-        if(id==''|| isNaN(id)){
-            error.push('id is invalid')
-        }
-        if(name==''){
-            error.push('name is not empty')
-        }
-        if(price==''|| isNaN(price)){
-            error.push('price is invalid')
-        }
-        if(description==''){
-            error.push('desciption is invalid')
-        }
-        if(image==''||!isValidURL(image)){
-            const extent = image.split('.').pop()
-            const allowImage = ['.jpj','.jpeg','.png','.gif','.bmp']
-            if(!allowImage.includes(extent)){
+    if (price == '' || isNaN(price)) {
+        error.push('price is invalid')
+    }
+    if (image == '' || !isValidURL(image)) {
+        const extent = image.split('.').pop()
+        const allowImage = ['.jpj', '.jpeg', '.png', '.gif', '.bmp']
+        if (!allowImage.includes(extent)) {
             error.push('image is not image link')
-            }
         }
-        return error
     }
-    // document.getElementById('btn-Up').addEventListener('click',function(e){
-    //     store.sapXepgia(true)
-    //     store.save()
-    //     renderTable(store.getProduct())
-    // })
-    // document.getElementById('btn-Down').addEventListener('click',function(e){
-    //     store.sapXepgia(false)
-    //     store.save()
-    //     renderTable(store.getProduct())
-    // })
-    // document.getElementById('btn-search').addEventListener('click', function(e){
-    //     let findName = prompt('Nhập tên sản phẩm bạn muốn tìm: ')
-    //     var item = store.getProduct().filter(item => item.getName().includes(findName))
-    //     renderTable(item)
-    // })
+    return error
+}
+window.addEventListener('load', function (e) {
+    renderTable(store.getProduct())
+    renderProductHome(store.getProduct())
+})
+// document.getElementById('btn-Up').addEventListener('click',function(e){
+//     store.sapXepgia(true)
+//     store.save()
+//     renderTable(store.getProduct())
+// })
+// document.getElementById('btn-Down').addEventListener('click',function(e){
+//     store.sapXepgia(false)
+//     store.save()
+//     renderTable(store.getProduct())
+// })
+// document.getElementById('btn-search').addEventListener('click', function(e){
+//     let findName = prompt('Nhập tên sản phẩm bạn muốn tìm: ')
+//     var item = store.getProduct().filter(item => item.getName().includes(findName))
+//     renderTable(item)
+// })
+// document.removeEventListener('click')
 
 export default ClassProduct;

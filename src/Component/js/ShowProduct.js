@@ -5,20 +5,8 @@ import productcode from './ProductCode';
 import React, {Component} from 'react';
 
 
-window.addEventListener('load',function(e){
-    const params = new URLSearchParams(window.location.search)
-    const id = params.get('id')
-    const product = productcode.list.findProduct(id)
-    if(product) {
-        this.document.getElementById('ten').innerText = product.ten
-        this.document.getElementById('hinhanh').src = product.hinhAnh
-        this.document.getElementById('giaban').innerText = product.gia
-        this.document.getElementById('ten2').innerText = product.ten
-    }
-})
-
-export default class ShowProduct extends Component {
-    render() {
+ function ShowProduct () {
+   
     return(
         <main id="main">
         <div id="container" class="container">
@@ -84,8 +72,54 @@ export default class ShowProduct extends Component {
         </div>
     </main>
     )
-    }
+   
 }
+export default ShowProduct;
+
+// class Product {
+//     constructor(id, name, price, image) {
+//         this.id=  id;
+//         this.name = name;
+//         this.price = price;
+//         this.image = image;
+//     }
+//     getName(){
+//         return this.name;
+//     }
+//     getId(){
+//         return this.id;
+//     }
+//     }
+//     class StoreProduct {
+//         constructor() {
+//         this.products = [];
+//         }
+//         getProduct() {
+//         return this.products
+//         }
+//         getById(id) {
+//             for(let i = 0; i < this.products.length; i++) {
+//                 const currentProduct = this.products[i];
+//                 if(currentProduct.id == id) {
+//                 return currentProduct
+//                 }
+//             }
+//         }
+//     }
+    
+//     const store = new StoreProduct();
+//     store.getData()
+// window.addEventListener('load',function(e){
+//     const params = new URLSearchParams(window.location.search)
+//     const id = params.get('id')
+//     const product = store.getById(id)
+//     if(product) {
+//         this.document.getElementById('ten').innerText = product.name
+//         this.document.getElementById('hinhanh').src = product.image
+//         this.document.getElementById('giaban').innerText = product.price
+//         this.document.getElementById('ten2').innerText = product.name
+//     }
+// })
 
 function btnSize() {
     var x = document.querySelectorAll('.btnSize');

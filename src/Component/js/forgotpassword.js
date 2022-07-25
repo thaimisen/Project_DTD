@@ -58,7 +58,7 @@ function Continue() {
                     <span id="messageEmail" class="form-message"></span>
                 </div>
                 <div class="form-group">
-                    <button class="btn-submit" type="submit" ><a href="" class="tieptuc">Tiếp tục</a></button>
+                    <button class="btn-submit" type="submit" ><a href="" className="tieptuc">Tiếp tục</a></button>
                 </div>
             </form>
         </div>
