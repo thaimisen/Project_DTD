@@ -1,81 +1,136 @@
 
 
+import '../css/ShowProduct.css'
+import $ from 'jquery'
+import React, { useState, useEffect, setItems } from 'react';
+import {
+    Link, useParams
+} from "react-router-dom";
+import { ButtonGroup } from 'reactstrap';
 
-import productcode from './ProductCode';
-import React, {Component} from 'react';
+function ShowProduct(e) {
 
+    let { id } = useParams();
+    const item = JSON.parse(localStorage.getItem('products'));
+    const itemsp = item.find(obj => {
+        return obj.id == id;
+    });
 
- function ShowProduct () {
-   
-    return(
+    const ds = [];
+    const addtocart = () => {
+        //localStorage.setItem('mycart', JSON.stringify(itemsp));
+        // lay danhsach sp trong localstorage
+        // var dssp =  JSON.parse(localStorage.getItem('products'));
+        // su ly javascript thêm sản phẩm
+        // them sp vào 1 array
+        itemsp.quantity = parseInt(document.getElementById('soluong').value);
+        itemsp.size = input;
+        ds.push(itemsp);
+        localStorage.setItem('mycart', JSON.stringify(ds));
+        /*
+          1. đã có trong cart: + số luong
+          2. chưa có trong cart
+        */
+    }
+
+    var btnSize = (e) => {
+
+        var x = document.querySelectorAll('.btnSize');
+        const $ = document.querySelector.bind(document);
+        x.forEach(function (size, index) {
+            size.onclick = function () {
+                $('.btnSize.btn-active-size').classList.remove('btn-active-size')
+                this.classList.add('btn-active-size')
+            }
+        })
+    }
+    let [num, setNum] = useState(1);
+    let incNum = () => {
+        if (num < 20) {
+            setNum(Number(num) + 1);
+        }
+    };
+    let decNum = () => {
+        if (num > 1) {
+            setNum(num - 1);
+        }
+    }
+    let handleChange = (e) => {
+        setNum(e.target.value);
+    }
+    const [input,setinput] = useState();
+    function handleClick (e) {
+        setinput(e.target.value) 
+    }
+
+    return (
         <main id="main">
-        <div id="container" class="container">
-            <div class="container-content">
-                <div class="container-path">
-                    <div class="container-path-iteam">
-                        <a>4MEN</a>
-                        <a>Áo Thun Nam</a>
-                        <a id="ten2">Áo Thun Regular 4Men Stripes AT064 Màu Đen</a>
-                    </div>
-                </div>
-            </div>
-            <div class="container-product-show">
-                <div class="container-product-show-left">
-                    <div class="container-product-show-left-active">
-                        <img src="/img/a1.jpg" alt=""></img>
-                        <img src="/img/a2.jpg" alt=""></img>
-                        <img src="/img/a3.jpg" alt=""></img>
-                        <img src="/img/a4.jpg" alt=""></img>
-                    </div>
-                    <div class="container-product-show-left-img">
-                        <img id="hinhanh" src="/img/-16641-slide-products-623aa84fc4566.jpg" alt="" class="img"></img>
-                    </div>
-                </div>
-                <div class="container-product-show-right">
-                    <div class="product-right-title">
-                        <h1 id="ten"></h1>
-                    </div>
-                    <div class="product-right-start">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <div class="product-right-reviews">
-                            <span><span>(19</span> lượt đánh giá / <span>49</span> lượt thích)</span>
+            <div id="container" class="container">
+                <div class="container-content">
+                    <div class="container-path">
+                        <div class="container-path-iteam">
+                            <a>4MEN</a>
+                            <a>Áo Thun Nam</a>
+                            <a id="ten2">{itemsp.name}</a>
                         </div>
                     </div>
-                    <div class="product-right-price">
-                        <span>Giá bán : <span id="giaban"></span></span>
+                </div>
+                <div class="container-product-show">
+                    <div class="container-product-show-left-img">
+                        <img src={process.env.PUBLIC_URL + itemsp.image} alt="" class="img"></img>
                     </div>
-                    <div class="product-right-color">
-                        <p>MÀU KHÁC*</p>
-                        <img src="/img/a6.jpg" alt=""></img>
-                    </div>
-                    <div class="product-right-size">
-                        <p>Chọn size:</p>
-                        <button class="btnSize btn-active-size">S</button>
-                        <button class="btnSize ">M</button>
-                        <button class="btnSize ">L</button>
-                        <button class="btnSize ">XL</button>
-                    </div>
-                    <div class="product-right-quantity">
-                        <span>Số lượng</span>
-                        <input id="soluong" type="number" value="1" class="product-right-quantity-input" min="1"></input>
-                    </div>
-                    <div class="product-right-buy">
-                        {/* <button onClick={addProductCart()}>Thêm vào giỏ hàng</button> */}
-                        <button>Mua Ngay</button>
-                    </div>
-                    <div className="product-right-quantity">
-                        <a href='/' className='return'><span className='return-span'>Quay lại</span></a>
+
+                    <div class="container-product-show-right">
+                        <div class="product-right-title">
+                            <h1 >{itemsp.name}</h1>
+                        </div>
+                        <div class="product-right-start">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <div class="product-right-reviews">
+                                <span><span>(19</span> lượt đánh giá / <span>49</span> lượt thích)</span>
+                            </div>
+                        </div>
+                        <div class="product-right-price">
+                            <span>Giá bán : <span >{itemsp.price}</span></span>
+                        </div>
+
+                        <div class="product-right-color">
+                            <p>MÀU KHÁC*</p>
+                            <img src="/img/a6.jpg" alt=""></img>
+                        </div>
+                        <div class="product-right-size">
+                            <p>Chọn size:</p>
+                            <ButtonGroup onClick={btnSize} >
+                                <button value='S' class="btnSize btn-active-size" onClick={handleClick}>S</button>
+                                <button value='M' class="btnSize " onClick={handleClick}>M</button>
+                                <button value='L' class="btnSize " onClick={handleClick}>L</button>
+                                <button value='XL' class="btnSize " onClick={handleClick}>XL</button>
+                            </ButtonGroup>
+                        </div>
+                        <div class="product-right-quantity">
+                            <div class="buttons_added">
+                                <input class="minus is-form" type="button" value="-" onClick={decNum}></input>
+                                <input id='soluong' aria-label="quantity" class="input-qty" type="number" value={num} onChange={handleChange}></input>
+                                <input class="plus is-form" type="button" value="+" onClick={incNum}></input>
+                            </div>
+                        </div>
+                        <div class="product-right-buy">
+                            <button onClick={addtocart}>Thêm vào giỏ hàng</button>
+                        </div>
+                        <div className="product-right-quantity">
+                            <a href='/' className='return'><span className='return-span'>Quay lại</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
     )
-   
+
+
 }
 export default ShowProduct;
 
@@ -109,7 +164,7 @@ export default ShowProduct;
 //             }
 //         }
 //     }
-    
+
 //     const store = new StoreProduct();
 //     store.getData()
 // window.addEventListener('load',function(e){
@@ -124,17 +179,8 @@ export default ShowProduct;
 //     }
 // })
 
-function btnSize() {
-    var x = document.querySelectorAll('.btnSize');
-    const $ = document.querySelector.bind(document);
-    x.forEach(function (size, index) {
-        size.onClick = function () {
-            $('.btnSize.btn-active-size').classList.remove('btn-active-size')
-            this.classList.add('btn-active-size')
-        }
-    })
-}
-btnSize();
+
+
 
 
 // class SanPham {

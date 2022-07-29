@@ -45,9 +45,13 @@
     margin: 0 auto;
     text-align: center;
     line-height: 100%;
-}.grid__column {
+}
+
+.grid__column {
+
     position: relative;
 }
+
 .grid-column-item-img {
     width: 100%;
     transition: all 1s;

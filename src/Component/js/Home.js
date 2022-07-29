@@ -4,15 +4,15 @@ import SliderShow2 from './Slider2.js';
 import '/reactjs/Project_DTD/src/Component/css/Home.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {
+    Link
+} from "react-router-dom";
+
 function Home() {
-    const [data, setdata] = useState([]);
+    const [items, setItems] = useState([]);
     useEffect(() => {
-        setdata([
-            { id: 1, name: "lol", gia: 1000, hinh: "https://scontent.fdad2-1.fna.fbcdn.net/v/t1.15752-9/277958793_735318341149503_5439175402540309513_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=nowed0aGsTYAX8qG1Xl&_nc_ht=scontent.fdad2-1.fna&oh=03_AVLtGUg8pTm-WbVJKNAvE83QYoJFG-Quh0sGeIb27noRdg&oe=62FCDCA3" },
-            { id: 2, name: "valorant", gia: 1000, hinh: "https://scontent.fdad1-1.fna.fbcdn.net/v/t1.15752-9/277422264_358848042845567_3399455747643769860_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=sSghd0p0g60AX9GuPJd&_nc_ht=scontent.fdad1-1.fna&oh=03_AVLnq4hV9gYUqJLSS5CEIGHIbplycs5aos0oO80fGS6RRA&oe=62FD0486" },
-            { id: 3, name: "tft", gia: 1000, hinh: "https://scontent.fdad1-3.fna.fbcdn.net/v/t1.15752-9/277902812_311879917729539_6394522788350800690_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=7nPR2kmhPWgAX_xzBeO&_nc_ht=scontent.fdad1-3.fna&oh=03_AVLhqcZI7ktlSFrd8d-HkOLU5qM1yMcRxdibyNFcgN8XEg&oe=62FE1693" }
-        ])
-    }, [])
+        setItems(JSON.parse(localStorage.getItem('products')));
+    }, []);
     return (
         <main>
             <div class="container">
@@ -42,10 +42,24 @@ function Home() {
                     </div>
                     <div class="container-product">
                         <div class="grid">
-                            <div class="grid__row" id="home">
-                                
+                            <div className='grid-row'>
+                                {items.map(item => (
+                                    <div key={item.id} >
+                                        <div className="grid__column">
+                                            <Link to={'/showproduct/' + item.id} className="grid-column-content">
+                                                <div class="grid-column-content-img">
+                                                    <img src={item.image} alt="" className="grid-column-item-img"></img>
+                                                </div>
+                                                <div class="grid-column-content-item">
+                                                    <p class="grid-column-content-name">{item.name}</p>
+                                                    <p class="grid-column-content-price">{item.price}</p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
+
                             </div>
-                            
                         </div>
                         <div class="see-more">
                             <a class="see-more-text" href="">Xem Thêm</a>
@@ -186,6 +200,6 @@ function Home() {
 
     );
 }
-  
+
 
 export default Home;

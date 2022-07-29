@@ -5,10 +5,10 @@ import './Component/css/Header.css'
 import './Component/css/Register.css'
 import './Component/css/Login.css'
 import './Component/css/ForgotAccount.css';
-import '/reactjs/Project_DTD/src/Component/css/ShowProduct.css'
 
 
-import React, { Component } from 'react'
+
+import React from 'react'
 import Home from './Component/js/Home.js';
 import Foot from './Component/js/Footer.js';
 import Head from './Component/js/Header.js';
@@ -39,26 +39,20 @@ function App() {
           <Route path="/" >
             <Head />
           </Route>
-
-          {/* <Switch> */}
-          <Route exact path='/' component={Home} />
-          <Route exact path='/forgotpassword' component={Forgotpassword} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/showproduct' component={ShowProduct} />
-          <Route exact path='/classproduct' component={ClassProduct} />
-            <Route exact path='/shoppingcart' component={ShoppingCart} />
-            <Route exact path='/detail:id' component={Detail} />
-          {/* </Switch> */}
-
+          <Switch>
+          <Route exact path='/' ><Home /></Route>
+          <Route exact path='/forgotpassword' ><Forgotpassword /></Route>
+          <Route exact path='/register' ><Register/></Route>
+          <Route exact path='/login'><Login/></Route> 
+          <Route exact path='/showproduct/:id'><ShowProduct/></Route> 
+          <Route exact path='/classproduct' ><ClassProduct /></Route>
+            <Route exact path='/shoppingcart'><ShoppingCart/></Route> 
+          </Switch>
           <Route path="/" >
             <Foot />
           </Route>
-
-
         </div>
       </Router>
-
     </div>
   );
 }
