@@ -15,12 +15,11 @@ function ShowProduct(e) {
     const itemsp = item.find(obj => {
         return obj.id == id;
     });
-
-    const ds = [];
+    var ds = [];
     const addtocart = () => {
         //localStorage.setItem('mycart', JSON.stringify(itemsp));
         // lay danhsach sp trong localstorage
-        // var dssp =  JSON.parse(localStorage.getItem('products'));
+        //  ds =  JSON.parse(localStorage.getItem('products'));
         // su ly javascript thêm sản phẩm
         // them sp vào 1 array
         itemsp.quantity = parseInt(document.getElementById('soluong').value);
@@ -118,12 +117,11 @@ function ShowProduct(e) {
                                 <input class="plus is-form" type="button" value="+" onClick={incNum}></input>
                             </div>
                         </div>
-                        <div class="product-right-buy">
-                            <button onClick={addtocart}>Thêm vào giỏ hàng</button>
+                        <div className='product-right-buy'>
+                            <button className='btn-addtocart'onClick={addtocart}>Thêm vào giỏ hàng</button>
+                            <a className='btn-addtocart' href='/'>Quay lại</a>
                         </div>
-                        <div className="product-right-quantity">
-                            <a href='/' className='return'><span className='return-span'>Quay lại</span></a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

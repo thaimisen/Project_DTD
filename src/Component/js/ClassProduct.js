@@ -1,11 +1,9 @@
 import '../css/ClassProduct.css';
 import { Modal } from "react-bootstrap";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-    Link
-} from "react-router-dom";
+    Link,useParams
+  } from "react-router-dom";
 
 
 function ClassProduct(e) {
@@ -13,6 +11,47 @@ function ClassProduct(e) {
     useEffect(() => {
         setItems(JSON.parse(localStorage.getItem('products')));
     }, []);
+    
+
+    let { id } = useParams();
+    const item = JSON.parse(localStorage.getItem('products'));
+    const itemsp = item.find(obj => {
+        return obj.id == id;
+    });
+    function onEdit(id) {
+        var myModal = new Modal(document.getElementById('modalProductEdit'), {
+            keyboard: false
+        })
+        const product = itemsp.id;
+        if (product) {
+            document.getElementById('prodId').value = product.id;
+            document.getElementById('prodName').value = product.name;
+            document.getElementById('prodImage').value = product.image;
+            document.getElementById('prodPrice').value = product.price;
+        }
+        myModal.show();
+    }
+    const showTable=()=>{
+        
+        <tr>    
+        {items.map(item => (
+                <div key={item.id} >
+        <td>{item.id}</td>
+        <td>{item.name}</td>
+        <td>{item.price}</td>
+        <td width="231px"><img src={item.image} width="230px" height="130px" /></td>
+        <td>
+        <button type="button" class="btn btn-edit" onClick={onEdit(item.id)}>Edit</button>
+        <br></br>
+        <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
+        <br></br>
+        </td>
+          </div>
+         
+    ))}
+    </tr>
+    window.location.reload(true);
+    }
     return (
 
         <div className="body">
@@ -43,27 +82,11 @@ function ClassProduct(e) {
                                     <th></th>
                                 </tr>
                             </thead>
-                            <div>
-                                {items.map(item => (
-                                    <div key={item.id} >
-                                        <tbody id="tableBody">
-                                            <tr>
-                                                <td>{item.id}</td>
-                                                <td>{item.name}</td>
-                                                <td>{item.price}</td>
-                                                <td> <img src={process.env.PUBLIC_URL + item.image} width="100px" height="200px"> </img></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-edit">Edit</button>
-                                                    <br></br>
-                                                    <button type="button" class="btn btn-danger" >remove</button>
-                                                    <br></br>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </div>
-                                ))}
-                            </div>
+                            <tbody id="tableBody">
+
+                            </tbody>
                         </table>
+
                         <div class="modal fade" id="frmProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -93,7 +116,7 @@ function ClassProduct(e) {
                                                 <label for="exampleInputPassword1" class="form-label">description</label>
                                                 <textarea class="form-control" type="text" className="form-control" id="description"></textarea>
                                             </div> */}
-                                            <button type="submit" class="btn btn-primary btn-submit" value="add">ADD</button>
+                                            <button type="submit" class="btn btn-primary btn-submit" value="add" onClick={showTable}>ADD</button>
                                             <div>
                                                 <p id="error"></p>
                                             </div>
@@ -251,6 +274,37 @@ const store = new StoreProduct();
 store.getData()
 
 
+function renderTable(products) {
+
+    let content = ''
+    for (let i = 0; i < products.length; i++) {
+        
+        const item = products[i];
+        content += `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td width="231px"><img src="${item.image}"width=230px height=130px /></td>
+                <td>
+                <button type="button" class="btn btn-edit" onclick="onEdit(${item.id})">Edit</button>
+                <br>
+                <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
+                <br>
+                </td>
+            </tr>
+            `
+    }
+    if (document.getElementById('tableBody')) {
+        document.getElementById('tableBody').innerHTML = content
+
+    }
+    
+}
+
+function myClick(){
+    alert("hello")
+}
 // renderTable(store.getProduct())
 
 
@@ -261,7 +315,7 @@ store.getData()
 //         const item = store[i];
 //         content += `
 //         <div class="grid__column">
-//             <p><Link to={'/product/' + ${item.id} className="grid-column-content"></Link></p>
+//           <Link to={'/product/' + ${item.id} className="grid-column-content"></Link></p>
 //                  <div class="grid-column-content-img">
 //                     <img src="${item.image}" alt="" className="grid-column-item-img">
 //                 </div>
@@ -276,7 +330,7 @@ store.getData()
 
 //     }
 // }
-// renderProductHome(store.getProduct())
+
 
 
 const createProduct = (event) => {
@@ -287,13 +341,13 @@ const createProduct = (event) => {
     const image = document.getElementById('image').value;
     const price = document.getElementById('price').value;
     console.log(id)
-    // const error = validate({id, name, price, image})
+    // const error = validate({ id, name, price, image })
     // if (error.length > 0) {
     //     document.getElementById('error').InnerHTML = error.join('<br>')
     //     return
     // }
     if (name == '' || price == '' || image == '' || id == '') {
-        alert('điền đầy đủ thông tin')
+        alert('điền đầy đủ thông tin')  
         return
     }
 
@@ -302,25 +356,11 @@ const createProduct = (event) => {
     if (isCreate) {
         alert('Thêm thành công')
         store.save();
+        // renderProductHome(store.getProduct())
     } else {
         alert('Thêm thất bại')
     }
 }
-// function onEdit(id) {
-
-//     var myModal = new Modal(document.getElementById('modalProductEdit'), {
-//         keyboard: false
-//     })
-//     const product = store.getById(id);
-//     if (product) {
-//         document.getElementById('prodId').value = product.id;
-//         document.getElementById('prodName').value = product.name;
-//         document.getElementById('prodImage').value = product.image;
-//         document.getElementById('prodPrice').value = product.price;
-//     }
-//     myModal.show();
-// }
-
 
 
 
@@ -332,7 +372,7 @@ document.getElementById('frmProductEdit') && document.getElementById('frmProduct
     const name = document.getElementById('prodName').value;
     const image = document.getElementById('prodImage').value;
     const price = document.getElementById('prodPrice').value;
-    if (name == '' || price == '' || image == '' || id == '') {
+    if (name == '' || price == '' || image == '' ||  id == '') {
         alert('điền đầy đủ thông tin')
         return
     }
@@ -341,7 +381,8 @@ document.getElementById('frmProductEdit') && document.getElementById('frmProduct
     if (isCreate) {
         alert('Cập nhật thành công')
         store.save();
-
+        renderTable(store.getProduct())
+        // renderProductHome(store.getProduct())
     } else {
         alert('Cập nhật thất bại')
     }
@@ -356,6 +397,8 @@ function onRemove(id) {
         if (isRemove) {
             alert('Xoá thành công')
             store.save();
+            renderTable(store.getProduct())
+            // renderProductHome(store.getProduct())
         } else {
             alert('Xoá thất bại')
         }
@@ -369,7 +412,7 @@ function onRemove(id) {
 function isValidURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1, 3}\\.){3}\\d{1, 3}))' + // OR ip (v4) address
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
         '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
         '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
         '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
@@ -396,6 +439,10 @@ function validate({ id, name, price, image }) {
     }
     return error
 }
+window.addEventListener('load', function (e) {
+    renderTable(store.getProduct())
+    // renderProductHome(store.getProduct())
+})
 
 
 // document.getElementById('btn-Up').addEventListener('click',function(e){

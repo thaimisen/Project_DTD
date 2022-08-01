@@ -1,7 +1,14 @@
-.home a, .cart a{
-    text-decoration: none;
-    color: #212529;
-  }
-  #inputQuantity{
-    max-width: 3rem;
-  }
+.home a,
+.cart a {
+  text-decoration: none;
+  color: #212529;
+}
+
+#inputQuantity {
+  max-width: 3rem;
+}
+
+.btn-delete {
+  margin-top: 40px;
+  border: none;
+}

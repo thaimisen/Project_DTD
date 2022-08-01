@@ -4,21 +4,37 @@ import React, { useState, useEffect } from 'react';
 import '/reactjs/Project_DTD/src/Component/css/ShoppingCart.css'
 import {
     Link,
-  } from "react-router-dom";
+} from "react-router-dom";
 function ShoppingCart() {
     const [data, setdata] = useState([]);
+    var dssp = []
     useEffect(() => {
-        const dssp = JSON.parse(localStorage.getItem('mycart'));
+        var dssp = JSON.parse(localStorage.getItem('mycart'));
         setdata(dssp);
     }, []);
     function deleteitem(id) {
         for (let i = 0; i < data.length; i++) {
             if (data[i].id == id) {
                 data.pop(i);
+                dssp.pop(i)
             }
         }
         localStorage.setItem('mycart', JSON.stringify(data));
         window.location.reload(true);
+    }
+    let [num, setNum] = useState(1);
+    let incNum = () => {
+        if (num < 20) {
+            setNum(Number(num) + 1);
+        }
+    };
+    let decNum = () => {
+        if (num > 1) {
+            setNum(num - 1);
+        }
+    }
+    let handleChange = (e) => {
+        setNum(e.target.value);
     }
     return (
 
@@ -56,14 +72,21 @@ function ShoppingCart() {
                                                     <div class="p-2" >
                                                         <img src={process.env.PUBLIC_URL + item.image} width="70" class="img-fluid rounded shadow-sm" />
                                                         <div class="ms-3 d-inline-block align-middle">
-                                                            <h5 class="mb-0"> <Link class="text-dark d-inline-block align-middle" to={'/showproduct/'+ item.id}>{item.name}</Link></h5>
+                                                            <h5 class="mb-0"> <Link class="text-dark d-inline-block align-middle" to={'/showproduct/' + item.id}>{item.name}</Link></h5>
                                                         </div>
                                                     </div>
                                                 </th>
                                                 <td className="border-0 align-middle"><strong>{item.price}</strong></td>
                                                 <td className="border-0 align-middle"><strong>{item.size}</strong></td>
-                                                <td className="border-0 align-middle"><strong>{item.quantity}</strong></td>
-                                                <button class='btn-delete'onClick={() => deleteitem(item.id)}> <td className="border-0 align-middle"><strong>-</strong></td></button>
+                                                <td className="border-0 align-middle">
+                                                    <div class="product-right-quantity">
+                                                        <div class="buttons_added">
+                                                            <input class="minus is-form" type="button" value="-" onClick={decNum}></input>
+                                                            <input id='soluong' aria-label="quantity" class="input-qty" type="number" value={num} onChange={handleChange}></input>
+                                                            <input class="plus is-form" type="button" value="+" onClick={incNum}></input>
+                                                        </div>
+                                                    </div></td>
+                                                <button className='btn-delete' onClick={() => deleteitem(item.id)}><strong>-</strong></button>
                                             </tr>
                                         </tbody>
                                     </table>

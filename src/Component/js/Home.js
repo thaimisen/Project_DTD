@@ -44,18 +44,16 @@ function Home() {
                         <div class="grid">
                             <div className='grid-row'>
                                 {items.map(item => (
-                                    <div key={item.id} >
-                                        <div className="grid__column">
-                                            <Link to={'/showproduct/' + item.id} className="grid-column-content">
-                                                <div class="grid-column-content-img">
-                                                    <img src={item.image} alt="" className="grid-column-item-img"></img>
-                                                </div>
-                                                <div class="grid-column-content-item">
-                                                    <p class="grid-column-content-name">{item.name}</p>
-                                                    <p class="grid-column-content-price">{item.price}</p>
-                                                </div>
-                                            </Link>
-                                        </div>
+                                    <div className="grid__column" key={item.id} >
+                                        <Link to={'/showproduct/' + item.id} className="grid-column-content">
+                                            <div class="grid-column-content-img">
+                                                <img src={item.image} alt="" className="grid-column-item-img"></img>
+                                            </div>
+                                            <div class="grid-column-content-item">
+                                                <p class="grid-column-content-name">{item.name}</p>
+                                                <p class="grid-column-content-price">{item.price}</p>
+                                            </div>
+                                        </Link>
                                     </div>
                                 ))}
 
