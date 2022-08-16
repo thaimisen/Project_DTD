@@ -1,57 +1,150 @@
 import '../css/ClassProduct.css';
-import { Modal } from "react-bootstrap";
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { Modal } from 'bootstrap'
+
+
+
 import {
-    Link,useParams
-  } from "react-router-dom";
+    Link, useParams
+} from "react-router-dom";
 
 
-function ClassProduct(e) {
+function ClassProduct(props) {
+    var dssp = JSON.parse(localStorage.getItem('products'))
     const [items, setItems] = useState([]);
     useEffect(() => {
-        setItems(JSON.parse(localStorage.getItem('products')));
+        setItems(dssp);
     }, []);
-    
+
 
     let { id } = useParams();
     const item = JSON.parse(localStorage.getItem('products'));
     const itemsp = item.find(obj => {
         return obj.id == id;
     });
+
+    const [modal, setModal] = useState();
+    const parseExceptionModal = useRef();
+    useEffect(() => {
+        const modal = new Modal(parseExceptionModal.current, { keyboard: false })
+        setModal(modal)
+    }, [])
+
+    function onRemove(id) {
+        const confirmAction = window.confirm("bạn có muốn xoá product id: " + id);
+        if (confirmAction) {
+            for (let i = 0; i < dssp.length; i++) {
+                if (dssp[i].id == id) {
+                    dssp.splice(i, 1);
+                }
+            }
+            localStorage.setItem('products', JSON.stringify(dssp));
+            window.location.reload(true);
+        }
+    }
+
+
     function onEdit(id) {
-        var myModal = new Modal(document.getElementById('modalProductEdit'), {
-            keyboard: false
-        })
-        const product = itemsp.id;
+        for (let i = 0; i < dssp.length; i++) {
+            if (dssp[i].id == id) {
+                var product = dssp[i]
+            }
+        }
         if (product) {
             document.getElementById('prodId').value = product.id;
             document.getElementById('prodName').value = product.name;
             document.getElementById('prodImage').value = product.image;
             document.getElementById('prodPrice').value = product.price;
         }
-        myModal.show();
+        modal.show()
     }
-    const showTable=()=>{
-        
-        <tr>    
-        {items.map(item => (
-                <div key={item.id} >
-        <td>{item.id}</td>
-        <td>{item.name}</td>
-        <td>{item.price}</td>
-        <td width="231px"><img src={item.image} width="230px" height="130px" /></td>
-        <td>
-        <button type="button" class="btn btn-edit" onClick={onEdit(item.id)}>Edit</button>
-        <br></br>
-        <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
-        <br></br>
-        </td>
-          </div>
-         
-    ))}
-    </tr>
-    window.location.reload(true);
+
+    const sortPriceUp = () => {
+        const sorted = [...items].sort((a, b) => {
+            return -b.price + a.price;
+        });
+        setItems(sorted);
+
+    };
+    const sortPriceDown = () => {
+        const sorted = [...items].sort((a, b) => {
+            return b.price - a.price;
+        });
+        setItems(sorted);
+    };
+    const findItem = () => {
+        let searchValue = prompt('Nhập tên sản phẩm bạn muốn tìm: ')
+        if (searchValue != '') {
+            const filteredData = [...items].filter((item) => {
+                return Object.values(item).join('').toLowerCase().includes(searchValue.toLowerCase())
+
+            })
+            setItems(filteredData)
+        }
+        else {
+            setItems(JSON.parse(localStorage.getItem('products')));
+        }
     }
+    const submitEdit = () => {
+        const id = document.getElementById('prodId').value;
+        const name = document.getElementById('prodName').value;
+        const image = document.getElementById('prodImage').value;
+        const price = document.getElementById('prodPrice').value;
+        const product = { id, name, price, image }
+        const error = validate({ id, name, price, image })
+        if (error.length > 0) {
+            document.getElementById('error').innerHTML = error.join('<br>')
+            return
+        }
+        for (let i = 0; i < dssp.length; i++) {
+            if (dssp[i].id == id) {
+                dssp[i] = product
+                alert('Successfully')
+                var check = true;
+            }
+        }
+        if (!check) {
+            alert('Unsuccessfully')
+        }
+        localStorage.setItem('products', JSON.stringify(dssp));
+        window.location.reload(true);
+
+    }
+
+
+    function isValidURL(str) {
+        var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+            '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+        return (!!pattern.test(str))
+    }
+
+    function validate({ id, name, price, image }) {
+        let error = [];
+        if (id == '' || isNaN(id)) {
+            error.push('id is invalid')
+        }
+        if (name == '') {
+            error.push('name is not empty')
+        }
+        if (price == '' || isNaN(price)) {
+            error.push('price is invalid')
+        }
+        if (image == '' || !isValidURL(image)) {
+            const extent = image.split('.').pop()
+            const allowImage = ['.jpj', '.jpeg', '.png', '.gif', '.bmp']
+            if (!allowImage.includes(extent)) {
+                error.push('image is not image link')
+            }
+        }
+        return error
+    }
+
+
     return (
 
         <div className="body">
@@ -61,13 +154,13 @@ function ClassProduct(e) {
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btn-create" data-bs-target="#frmProduct">
                             create
                         </button>
-                        <button type="button" class="btn btn-primary" id="btn-Up" >
+                        <button type="button" class="btn btn-primary" id="btn-Up" onClick={(e) => sortPriceUp(e.target.value)}>
                             Up
                         </button>
-                        <button type="button" class="btn btn-primary" id="btn-Down" >
+                        <button type="button" class="btn btn-primary" id="btn-Down" onClick={(e) => sortPriceDown(e.target.value)}>
                             Down
                         </button>
-                        <button type="button" class="btn btn-primary" id="btn-search" >
+                        <button type="button" class="btn btn-primary" id="btn-search" onClick={(e) => findItem(e.target.value)}>
                             Search
                         </button>
                         <a href="/" class="btn btn-primary" id="btn-Down">Home</a>
@@ -83,7 +176,20 @@ function ClassProduct(e) {
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
-
+                                {items.map((item, index) => (
+                                    <tr key={item.id}>
+                                        <td>{item.id}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.price}</td>
+                                        <td width="200px"><img src={item.image} width="200px" /></td>
+                                        <td>
+                                            <button type="button" class="btn btn-edit" id="btn-edit" onClick={() => onEdit(item.id)}>Edit</button>
+                                            <br></br>
+                                            <button type="button" class="btn btn-danger" id="btn-remove" onClick={() => onRemove(item.id)}>remove</button>
+                                            <br></br>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
 
@@ -116,20 +222,20 @@ function ClassProduct(e) {
                                                 <label for="exampleInputPassword1" class="form-label">description</label>
                                                 <textarea class="form-control" type="text" className="form-control" id="description"></textarea>
                                             </div> */}
-                                            <button type="submit" class="btn btn-primary btn-submit" value="add" onClick={showTable}>ADD</button>
+                                            <button type="submit" class="btn btn-primary btn-submit" value="add" >ADD</button>
                                             <div>
                                                 <p id="error"></p>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {/* <!-- edit form--> */}
-                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalProductEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true" ref={parseExceptionModal}>
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -137,7 +243,7 @@ function ClassProduct(e) {
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="frmProductEdit">
+                                        <form id="frmProductEdit" >
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">id</label>
                                                 <input type="text" class="form-control" id="prodId" aria-describedby="emailHelp"></input>
@@ -158,13 +264,13 @@ function ClassProduct(e) {
                                                 <label for="exampleInputPassword1" class="form-label">description</label>
                                                 <textarea class="form-control" type="text" className="form-control" id="prodDescription"></textarea>
                                             </div> */}
-                                            <button type="submit" class="btn btn-primary btn-submit" value="add">Change</button>
+                                            <button type="submit" class="btn btn-primary btn-submit" value="add" onClick={submitEdit}>Change</button>
                                             <div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => modal.hide()}>Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -274,64 +380,6 @@ const store = new StoreProduct();
 store.getData()
 
 
-function renderTable(products) {
-
-    let content = ''
-    for (let i = 0; i < products.length; i++) {
-        
-        const item = products[i];
-        content += `
-            <tr>
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.price}</td>
-                <td width="231px"><img src="${item.image}"width=230px height=130px /></td>
-                <td>
-                <button type="button" class="btn btn-edit" onclick="onEdit(${item.id})">Edit</button>
-                <br>
-                <button type="button" class="btn btn-danger" onclick="onRemove(${item.id})">remove</button>
-                <br>
-                </td>
-            </tr>
-            `
-    }
-    if (document.getElementById('tableBody')) {
-        document.getElementById('tableBody').innerHTML = content
-
-    }
-    
-}
-
-function myClick(){
-    alert("hello")
-}
-// renderTable(store.getProduct())
-
-
-// function renderProductHome(store) {
-
-//     let content = ''
-//     for (let i = 0; i < store.length; i++) {
-//         const item = store[i];
-//         content += `
-//         <div class="grid__column">
-//           <Link to={'/product/' + ${item.id} className="grid-column-content"></Link></p>
-//                  <div class="grid-column-content-img">
-//                     <img src="${item.image}" alt="" className="grid-column-item-img">
-//                 </div>
-//                 <div class="grid-column-content-item">
-//                     <p class="grid-column-content-name">${item.name}</p>
-//                     <p class="grid-column-content-price">${item.price}</p>
-//                 </div>
-//         </div>`
-//     }
-//     if (document.getElementById('home')) {
-//         document.getElementById('home').innerHTML = content
-
-//     }
-// }
-
-
 
 const createProduct = (event) => {
     event.preventDefault();
@@ -347,7 +395,7 @@ const createProduct = (event) => {
     //     return
     // }
     if (name == '' || price == '' || image == '' || id == '') {
-        alert('điền đầy đủ thông tin')  
+        alert('điền đầy đủ thông tin')
         return
     }
 
@@ -364,46 +412,6 @@ const createProduct = (event) => {
 
 
 
-
-document.getElementById('frmProductEdit') && document.getElementById('frmProductEdit').addEventListener('submit', function (event) {
-
-    event.preventDefault();
-    const id = document.getElementById('prodId').value;
-    const name = document.getElementById('prodName').value;
-    const image = document.getElementById('prodImage').value;
-    const price = document.getElementById('prodPrice').value;
-    if (name == '' || price == '' || image == '' ||  id == '') {
-        alert('điền đầy đủ thông tin')
-        return
-    }
-    const product = new Product(id, name, price, image);
-    const isCreate = store.update(product);
-    if (isCreate) {
-        alert('Cập nhật thành công')
-        store.save();
-        renderTable(store.getProduct())
-        // renderProductHome(store.getProduct())
-    } else {
-        alert('Cập nhật thất bại')
-    }
-
-
-})
-
-function onRemove(id) {
-    const confirmAction = window.confirm("bạn có muốn xoá product id: " + id);
-    if (confirmAction) {
-        const isRemove = store.remove(id);
-        if (isRemove) {
-            alert('Xoá thành công')
-            store.save();
-            renderTable(store.getProduct())
-            // renderProductHome(store.getProduct())
-        } else {
-            alert('Xoá thất bại')
-        }
-    }
-}
 
 
 
@@ -439,28 +447,9 @@ function validate({ id, name, price, image }) {
     }
     return error
 }
-window.addEventListener('load', function (e) {
-    renderTable(store.getProduct())
-    // renderProductHome(store.getProduct())
-})
 
 
-// document.getElementById('btn-Up').addEventListener('click',function(e){
-//     store.sapXepgia(true)
-//     store.save()
-//     renderTable(store.getProduct())
-// })
-// document.getElementById('btn-Down').addEventListener('click',function(e){
-//     store.sapXepgia(false)
-//     store.save()
-//     renderTable(store.getProduct())
-// })
-// document.getElementById('btn-search').addEventListener('click', function(e){
-//     let findName = prompt('Nhập tên sản phẩm bạn muốn tìm: ')
-//     var item = store.getProduct().filter(item => item.getName().includes(findName))
-//     renderTable(item)
-// })
-// document.removeEventListener('click')
+
 
 
 export default ClassProduct;

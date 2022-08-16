@@ -8,6 +8,17 @@ import {
 } from "react-router-dom";
 import { ButtonGroup } from 'reactstrap';
 
+
+function btnSize(e){
+    var x = document.querySelectorAll('.btnSize');
+    const $ = document.querySelector.bind(document);
+    x.forEach(function (size, index) {
+        size.onclick = function () {
+            $('.btnSize.btn-active-size').classList.remove('btn-active-size')
+            this.classList.add('btn-active-size')
+        }
+    })
+}
 function ShowProduct(e) {
 
     let { id } = useParams();
@@ -31,18 +42,8 @@ function ShowProduct(e) {
           2. chưa có trong cart
         */
     }
-
-    var btnSize = (e) => {
-
-        var x = document.querySelectorAll('.btnSize');
-        const $ = document.querySelector.bind(document);
-        x.forEach(function (size, index) {
-            size.onclick = function () {
-                $('.btnSize.btn-active-size').classList.remove('btn-active-size')
-                this.classList.add('btn-active-size')
-            }
-        })
-    }
+    
+    
     let [num, setNum] = useState(1);
     let incNum = () => {
         if (num < 20) {

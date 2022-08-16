@@ -46,7 +46,10 @@
     text-align: center;
     line-height: 100%;
 }
-
+.grid-row{
+    display: flex;
+    flex-wrap : wrap ;
+}
 .grid__column {
 
     position: relative;

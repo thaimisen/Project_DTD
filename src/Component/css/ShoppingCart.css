@@ -9,6 +9,7 @@
 }
 
 .btn-delete {
-  margin-top: 40px;
+  margin-top: 45px;
   border: none;
+  display: inline-block;
 }
